@@ -3,9 +3,14 @@ const router = express.Router();
 const slugify = require('slugify');
 const Categories = require('../../models/Categories');
 
+
+
+
 router.get('/', (req, res) => {
     res.send('enviado');
 });
+
+
 
 
 router.get('/admin/categories/new', (req,res) => {
@@ -19,6 +24,8 @@ router.get('/admin/categories/new', (req,res) => {
 
 router.post('/categories/save', (req, res) => {
     let title = req.body.title;
+
+
 
     if(title != undefined){
             
@@ -34,14 +41,12 @@ router.post('/categories/save', (req, res) => {
     }else{
         res.redirect('/admin/categories/new');
 
+
     }
    
 
+
 });
-
-
-
-
 
 
 
