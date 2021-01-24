@@ -28,7 +28,7 @@ Articles = db.define('articles',{
 });
 
 
-Articles.sync({force:true});
+//Articles.sync({force:true});
 
 
 module.exports = Articles;

@@ -2,15 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 
+
+
 router.get('/articles', (req, res) => {
-    res.render('index');
+    res.render('articles/indexArticles');
 });
 
 
 
 router.get('/admin/articles/new', (req, res) => {
-    res.send('Rota para criar novos artigos');
+    res.render('articles/admin/newArticles');
 });
+
 
 
 

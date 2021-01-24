@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 
 
 
 const Articles = require('./models/Articles');
 const Categories = require('./models/Categories');
+
 
 
 
@@ -27,18 +29,21 @@ db.authenticate().then(() => {
 
 
 
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 
 
+
 app.use('/', categoriesController);
+
 app.use('/', articlesController);
 
-app.get('/', (req, res) => {
-    res.send('On');
-});
+
+
 
 
 
