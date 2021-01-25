@@ -5,14 +5,6 @@ const Categories = require('../../models/Categories');
 
 
 
-
-router.get('/', (req, res) => {
-    res.send('enviado');
-});
-
-
-
-
 router.get('/admin/categories/new', (req,res) => {
     res.render('categories/admin/newCategories');
 
@@ -33,7 +25,7 @@ router.post('/categories/save', (req, res) => {
             title:title,
             slug: slugify(title),
         }).then(() => {
-            res.redirect('/');
+           res.redirect('/admin/categories/index');
         });
 
 
@@ -48,6 +40,34 @@ router.post('/categories/save', (req, res) => {
 
 });
 
+
+
+router.post('/categories/delete', (req, res) => {
+    let id = req.body.id;
+
+
+    if(id != undefined){
+
+        if(!isNaN(id)){
+
+            Categories.destroy({
+                where:{
+                    id:id,
+                }
+            }).then(() => {
+                res.redirect('/admin/categories/index');
+            })
+
+        }else{
+            res.redirect('/admin/categories/admin');
+
+        }
+
+    }else{
+        res.redirect('/admin/categories/admin');
+
+    }
+});
 
 
 
