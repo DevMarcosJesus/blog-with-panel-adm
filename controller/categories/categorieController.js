@@ -50,4 +50,16 @@ router.post('/categories/save', (req, res) => {
 
 
 
+
+router.get('/admin/categories/index', (req, res) => {
+    
+    Categories.findAll({
+        
+    }).then((categories) => {
+        res.render('categories/indexCategories',{categories:categories});
+
+    })
+
+});
+
 module.exports = router;

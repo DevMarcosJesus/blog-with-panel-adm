@@ -1,27 +1,39 @@
 
-    <%- include('partials/header')%>
+    <%- include('../partials/header')%>
     <body>
-        <%- include('partials/navbar')%>
-            <div class="container">
-                <hr>
-        <div class="card">
-            <div class="card-header">
-                <h4>Criar uma nova categoria</h4>
-            </div>
-            <div class="card-body">
-                <form>  
-                    <input class="form-control" type="text" name="title" placeholder="Digite o titulo da categoria"><br><br>
-                    <button class="btn btn-success">Cadastrar</button>
-                </form>
-            </div>
-           
-    ''
+        <%- include('../partials/navbar')%>
+
+        <div class="container">
+            <hr>
+            <h2>Categorias</h2>
+            <hr>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Titulo</th>
+                        <th>Slug</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>   
+                    <% categories.forEach(category => {%>
+                    <tr>
+                        <th><%= category.id%></th>
+                        <th><%= category.title%></th>
+                        <th><%= category.slug%></th>
+                    
+                    </tr>
+                    <%});%>
+                </tbody>
+            </table>
+
         </div>
-    </div>
     
     </body>
     
-        <%- include('partials/footer')%>
+        <%- include('../partials/footer')%>
     
     
     
