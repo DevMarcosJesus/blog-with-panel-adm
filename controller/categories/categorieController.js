@@ -5,6 +5,8 @@ const Categories = require('../../models/Categories');
 
 
 
+
+
 router.get('/admin/categories/new', (req,res) => {
     res.render('categories/admin/newCategories');
 
@@ -42,6 +44,7 @@ router.post('/categories/save', (req, res) => {
 
 
 
+
 router.post('/categories/delete', (req, res) => {
     let id = req.body.id;
 
@@ -71,6 +74,45 @@ router.post('/categories/delete', (req, res) => {
 
 
 
+
+router.get('/admin/categories/edit/:id', (req, res, next)=>{
+    let id = req.params.id;
+
+    if(isNaN(id)){
+        res.redirect('/admin/categories/index');
+    }
+
+    Categories.findByPk(id).then(categories => {
+        if(categories != undefined){
+
+            res.render('categories/admin/editCategories', {categories:categories})
+
+
+        }else{
+            res.redirect('/admin/categories/index');
+        }
+    });
+});
+
+
+
+
+router.post('/categories/update', (req, res) => {
+    let id = req.body.id;
+    let title = req.body.title;
+
+    Categories.update({title: title,slug:slugify(title)},{
+        where:{
+            id:id
+        }
+    }).then( () => {
+        res.redirect('/admin/categories/index');
+    });
+});
+
+
+
+
 router.get('/admin/categories/index', (req, res) => {
     
     Categories.findAll({
@@ -81,5 +123,8 @@ router.get('/admin/categories/index', (req, res) => {
     })
 
 });
+
+
+
 
 module.exports = router;
